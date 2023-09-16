@@ -19,18 +19,14 @@ public class InfixPostfix {
                 sb.append(c);
             } else {
                 int prec = precedence(c);
-                if (st.empty()) {
-                    st.push(c);
-                } else {
-                    int stackTopPrecendece = precedence(st.peek());
-
-                    while (stackTopPrecendece < prec) {
-                        stackTopPrecendece = precedence(st.peek());
-                        st.pop();
-                    }
+                while (!st.isEmpty() && (prec == precedence(st.peek()) || precedence(st.peek()) > prec)) {
+                    sb.append(st.pop());
                 }
-
+                st.push(c);
             }
+        }
+        while (!st.isEmpty()) {
+            sb.append(st.pop());
         }
         System.out.println(sb.toString());
         return sb.toString();
