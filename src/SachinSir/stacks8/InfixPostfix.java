@@ -19,7 +19,7 @@ public class InfixPostfix {
                 sb.append(c);
             } else {
                 int prec = precedence(c);
-                while (!st.isEmpty() && (prec == precedence(st.peek()) || precedence(st.peek()) > prec)) {
+                while (!st.isEmpty() && (prec == precedence(st.peek()) || prec < precedence(st.peek()))) {
                     sb.append(st.pop());
                 }
                 st.push(c);
